@@ -11,11 +11,11 @@ enum EntropyError: Error {
     case invalidBufferSize
 }
 
-class Entropy {
+public class Entropy {
     
     private(set) var bytes: [UInt8]!
     
-    init() {
+    public init() {
         var _bytes = [UInt8](repeating: 0, count: 16)
         _bytes = try! URandom().bytes(count: 16)
 //        let status = SecRandomCopyBytes(kSecRandomDefault, _bytes.count, &_bytes)
@@ -26,7 +26,7 @@ class Entropy {
         self.bytes = _bytes
     }
     
-    init(bytes: [UInt8]) {
+    public init(bytes: [UInt8]) {
         self.bytes = bytes
     }
 }

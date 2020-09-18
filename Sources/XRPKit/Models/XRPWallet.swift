@@ -202,7 +202,7 @@ public class XRPSeedWallet: XRPWallet {
         self.init(entropy: entropy, type: type)
     }
 
-    private static func encodeSeed(entropy: Entropy, type: SeedType) throws -> String {
+    public static func encodeSeed(entropy: Entropy, type: SeedType) throws -> String {
         // [0x01, 0xE1, 0x4B] = sEd, [0x21] = s
         // see ripple/ripple-keypairs
         let version: [UInt8] = type == .ed25519 ? [0x01, 0xE1, 0x4B] : [0x21]
@@ -212,7 +212,7 @@ public class XRPSeedWallet: XRPWallet {
         return String(base58Encoding: Data(versionEntropyCheck), alphabet: Base58String.xrpAlphabet)
     }
 
-    private static func decodeSeed(seed: String) throws -> [UInt8]? {
+    public static func decodeSeed(seed: String) throws -> [UInt8]? {
         // make sure seed will at least parse for checksum validation
         // FIXME: this needs work
         if seed.count < 10 || Data(base58Decoding: seed) == nil || seed.first != "s" {
